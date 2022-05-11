@@ -1,7 +1,9 @@
 import express from 'express';
 import process from '../../util/process'
+import path from 'path';
 
 const images = express.Router()
+const pathFind = path.resolve(__dirname, '../../assets')
 
 images.get('/', (req, res) => {
     let file = req.query.file;
@@ -16,8 +18,8 @@ images.get('/', (req, res) => {
     }
 
     const processImage = async () => {
-        const img = await process(file, width, height)
-        res.status(200).send(`api link working, with the following params:\n\nfile:${file}\nheight:${height}\nwidth:${width} `)
+        let fileout = await process(file, width, height)
+        res.sendFile(`${pathFind}/${fileout}`)
     }
     
     try {

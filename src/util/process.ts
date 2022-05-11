@@ -8,9 +8,9 @@ const process = (file, width, height) => {
     .jpeg({ mozjpeg: true })
     .toBuffer()
     .then( data => { 
-        fsPromises.writeFile(`src/assets/thumb/${file}_thumb.jpg`, data)
+        fsPromises.writeFile(`src/assets/thumb/${file}${width}x${height}_thumb.jpg`, data)
      })
-    return `../assets/thumb/${file}_thumb.jpg`
+    return `thumb/${file}${width}x${height}_thumb.jpg`
 }
 
 export default process

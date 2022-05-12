@@ -1,4 +1,4 @@
-const sharp = require('sharp');
+import sharp from 'sharp';
 
 const process =  async (width: number, height: number, inPath: string, outPath: string) => {
     

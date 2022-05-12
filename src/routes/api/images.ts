@@ -13,15 +13,19 @@ images.get('/', async (req: express.Request, res: express.Response): Promise<voi
     const width = req.query.width as number | string
     
     try {
-          const validated =  validate(file, width, height);
           const inPath = path.normalize(`${pathFind}/full/${file}.jpg`)
+          const validated =  validate(width, height);
           const outPath = path.normalize(`${pathFind}/thumb/${file}${validated.width}x${validated.height}_thumb.jpg`)
 
-          if (!fs.existsSync(outPath)) {
+        if (!fs.existsSync(inPath)) {
+            res.status(404).send(`File not found at directory ${inPath}`);
+        }
+        
+        if (!fs.existsSync(outPath)) {
             await process(validated.width, validated.height, inPath, outPath);
-          }
+        }
 
-          return res.status(200).sendFile(`${outPath}`);
+        res.status(200).sendFile(`${outPath}`);
 
     }
     catch {

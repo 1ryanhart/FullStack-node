@@ -18,7 +18,7 @@ const validate_1 = __importDefault(require("../../util/validate"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const images = express_1.default.Router();
-const pathFind = path_1.default.resolve(__dirname, '../../assets');
+const pathFind = path_1.default.resolve(__dirname, '../../../assets');
 images.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const file = req.query.file;
     const height = req.query.height;
@@ -26,6 +26,9 @@ images.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const inPath = path_1.default.normalize(`${pathFind}/full/${file}.jpg`);
         const validated = (0, validate_1.default)(width, height);
+        console.log('********************');
+        console.log(inPath);
+        console.log('********************');
         if (!fs_1.default.existsSync(`${pathFind}/thumb/`)) {
             fs_1.default.mkdirSync(`${pathFind}/thumb/`);
         }
@@ -38,7 +41,7 @@ images.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 yield (0, process_1.default)(validated.width, validated.height, inPath, outPath);
             }
             catch (_a) {
-                res.status(400).send('error processing immage.');
+                res.status(400).send('error processing image');
             }
         }
         res.status(200).sendFile(`${outPath}`);

@@ -15,7 +15,7 @@ describe('Tests for validate function', () => {
 
 describe('Tests for process function', () => {
   it('should create file if it doesnt exist', async () => {
-    const pathFind = path.resolve(__dirname, '../../src/assets');
+    const pathFind = path.resolve(__dirname, '../../assets');
     const inPath = path.normalize(`${pathFind}/full/fjord.jpg`);
     const outPath = path.normalize(`${pathFind}/thumb/fjord123x123_thumb.jpg`);
 

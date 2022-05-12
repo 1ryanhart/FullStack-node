@@ -27,7 +27,7 @@ describe('Tests for validate function', () => {
 });
 describe('Tests for process function', () => {
     it('should create file if it doesnt exist', () => __awaiter(void 0, void 0, void 0, function* () {
-        const pathFind = path_1.default.resolve(__dirname, '../../src/assets');
+        const pathFind = path_1.default.resolve(__dirname, '../../assets');
         const inPath = path_1.default.normalize(`${pathFind}/full/fjord.jpg`);
         const outPath = path_1.default.normalize(`${pathFind}/thumb/fjord123x123_thumb.jpg`);
         if (fs_1.default.existsSync(outPath)) {

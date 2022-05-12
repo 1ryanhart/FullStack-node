@@ -5,7 +5,7 @@ import path from 'path';
 import fs from 'fs';
 
 const images = express.Router();
-const pathFind = path.resolve(__dirname, '../../assets');
+const pathFind = path.resolve(__dirname, '../../../assets');
 
 images.get(
   '/',
@@ -17,7 +17,6 @@ images.get(
     try {
       const inPath = path.normalize(`${pathFind}/full/${file}.jpg`);
       const validated = validate(width, height);
-
       if (!fs.existsSync(`${pathFind}/thumb/`)) {
         fs.mkdirSync(`${pathFind}/thumb/`);
       }

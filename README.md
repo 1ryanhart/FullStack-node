@@ -10,46 +10,34 @@ This is a project submission in the Udacity Full Stack Developer for Shell Nanod
 $ npm install
 ```
 
-## package.json scripts
+## Running the server
 
-1. **Generating memes from the command line**
-
-```bash
-$ node src/.
-```
-
-or
+1. **Compiling the TypeScript to JavaScript**
 
 ```bash
-$ export FLASK_APP=hello
-$ flask run
+$ npm run build
 ```
 
-Open http://127.0.0.1:5000/ in a web browser to access the app.
-
-5. **Generating memes from the command line** - The app can be run from the command line, without the need to set up a Flask server. Navigate to the root directory (src) and run:
+2. **Running the server. Note: the build must be performed first**
 
 ```bash
-$ python meme.py --path {path} --body {body} --author {author}
+$ node dist/.
 ```
 
-Path, body and author are all optional arguements. If none are passed, then defaults are randomly selected.
+## Testing with Jasmine
 
-- Path is the file path to the image for the meme.
-- Body is the body of the quote.
-- Author is the author of the quote.
+Tests have been written using Jasmine. To execute the tests, run:
 
-## Modules
+```bash
+$ npm run test
+```
 
-### MemeEngine
+## API Endpoints
 
-The MemeEngine module contains only the MemeEngine class with is instantiated when the app is ran (either in the command line or via Flask server). This class has the _makememe_ method which takes 3 parameters (image path, body, author) and returns to path to a generated meme
+### GET /api/images
 
-### QuoteEngine
+The following URL parameters need to be supplied with the request
 
-The QuoteEngine module contains the following:
-
-- **IngestorInterface** - An abstract base class for other specific child Ingestors to inherit from. Defines the _can_ingest_ and _parse_ methods
-- **Ingestors** - Childer IngestorInterface classes to parse .txt, .pdf, .docx or .csv files and to generate Quote objects from the parsed text
-- **Ingestor** - Realises the IngestorInterface abstract base class. Used as a
-  selector to parse a given file to the correct Ingestor (pdf, txt, docx, csv).
+- **Image name** -eg 'fjord'. This is the name of the file (without the .jpg extension) within the assets/full directory to process
+- **Width** - the required width of the output file. If no width is specified, the default is 200px
+- **Height** - the required height of the output file. If no height is specified, the default is 200px

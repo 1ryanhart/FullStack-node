@@ -6,11 +6,7 @@ const process = async (
   inPath: string,
   outPath: string
 ) => {
-  try {
-    await sharp(inPath).resize(width, height).toFile(outPath);
-  } catch (err) {
-    console.log('error processing file', err);
-  }
+  await sharp(inPath).resize(width, height).toFile(outPath);
 
   return outPath;
 };

@@ -19,10 +19,10 @@ const fs_1 = __importDefault(require("fs"));
 const routes_1 = __importDefault(require("../routes"));
 describe('Tests for validate function', () => {
     it('should default to 200x200 if no values given', () => {
-        expect((0, validate_1.default)(null, null)).toEqual({ 'width': 200, 'height': 200 });
+        expect((0, validate_1.default)(null, null)).toEqual({ width: 200, height: 200 });
     });
     it('should parse strings to numbers', () => {
-        expect((0, validate_1.default)(null, '450')).toEqual({ 'width': 200, 'height': 450 });
+        expect((0, validate_1.default)(null, '450')).toEqual({ width: 200, height: 450 });
     });
 });
 describe('Tests for process function', () => {

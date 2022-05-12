@@ -14,14 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sharp_1 = __importDefault(require("sharp"));
 const process = (width, height, inPath, outPath) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield (0, sharp_1.default)(inPath)
-            .resize(width, height)
-            .toFile(outPath);
-    }
-    catch (err) {
-        console.log('error processing file', err);
-    }
+    yield (0, sharp_1.default)(inPath).resize(width, height).toFile(outPath);
     return outPath;
 });
 exports.default = process;

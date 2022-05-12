@@ -31,7 +31,11 @@ images.get(
       }
 
       if (!fs.existsSync(outPath)) {
-        await process(validated.width, validated.height, inPath, outPath);
+        try {
+          await process(validated.width, validated.height, inPath, outPath);
+        } catch {
+          res.status(400).send('error processing image');
+        }
       }
 
       res.status(200).sendFile(`${outPath}`);

@@ -11,18 +11,28 @@ images.get(
   '/',
   async (req: express.Request, res: express.Response): Promise<void> => {
     const file = req.query.file as string;
-    const height = req.query.height as number | string;
-    const width = req.query.width as number | string;
+    let height = req.query.height as number | string;
+    let width = req.query.width as number | string;
 
     try {
       const inPath = path.normalize(`${pathFind}/full/${file}.jpg`);
-      const validated = validate(width, height);
+      const val = validate(width, height);
+        console.log(val.width)
+      if (
+        isNaN(val.width) ||
+        val.width <= 0 ||
+        isNaN(val.height) ||
+        val.height <= 0
+      ) {
+        res.status(400).send('error processing width or height parameters');
+      }
+
       if (!fs.existsSync(`${pathFind}/thumb/`)) {
         fs.mkdirSync(`${pathFind}/thumb/`);
       }
 
       const outPath = path.normalize(
-        `${pathFind}/thumb/${file}${validated.width}x${validated.height}_thumb.jpg`
+        `${pathFind}/thumb/${file}${val.width}x${val.height}_thumb.jpg`
       );
 
       if (!fs.existsSync(inPath)) {
@@ -31,7 +41,7 @@ images.get(
 
       if (!fs.existsSync(outPath)) {
         try {
-          await process(validated.width, validated.height, inPath, outPath);
+          await process(val.width, val.height, inPath, outPath);
         } catch {
           res.status(400).send('error processing image');
         }
@@ -39,7 +49,11 @@ images.get(
 
       res.status(200).sendFile(`${outPath}`);
     } catch {
-      res.status(400).send('error');
+      res
+        .status(400)
+        .send(
+          'error processing inpur height and width. Ensure positive integers are passed'
+        );
     }
   }
 );

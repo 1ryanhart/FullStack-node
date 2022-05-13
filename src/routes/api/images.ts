@@ -11,13 +11,12 @@ images.get(
   '/',
   async (req: express.Request, res: express.Response): Promise<void> => {
     const file = req.query.file as string;
-    let height = req.query.height as number | string;
-    let width = req.query.width as number | string;
+    const height = req.query.height as number | string;
+    const width = req.query.width as number | string;
 
     try {
       const inPath = path.normalize(`${pathFind}/full/${file}.jpg`);
       const val = validate(width, height);
-        console.log(val.width)
       if (
         isNaN(val.width) ||
         val.width <= 0 ||
